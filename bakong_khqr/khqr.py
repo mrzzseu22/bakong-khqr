@@ -148,7 +148,20 @@ class KHQR:
         
         response = self.__post_request("/generate_deeplink_by_qr", payload)
         return response.get("data", {}).get("shortLink", None) if response.get("responseCode") == 0 else None
-    
+            
+    def renew_token(self):
+
+        headers = {
+            "Content-Type": "application/json;charset=UTF-8"
+        }
+
+        data=  { 
+            "email": "your_email"
+        }
+        
+        response = requests.post(self.bakong_api + "/renew_token", headers=headers, json = data).json()
+        return response
+        
     def check_payment(
         self, 
         md5: str
